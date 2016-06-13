@@ -357,6 +357,63 @@ config FREETZ_MODULE_option
 	select FREETZ_MODULE_usbserial
 	default n
 
+config FREETZ_MODULE_dvb_usb_dib0700
+       bool "dvb-usb-dib0700.ko"
+       select FREETZ_MODULE_dib0070
+       select FREETZ_MODULE_dib8000
+       select FREETZ_MODULE_dib7000p
+       select FREETZ_MODULE_dib7000m
+       select FREETZ_MODULE_dib0090
+       select FREETZ_MODULE_dib3000mc
+       select FREETZ_MODULE_dibx000_common
+       select FREETZ_MODULE_dvb_usb
+       select FREETZ_MODULE_rc_core
+       select FREETZ_MODULE_usbcore
+       select FREETZ_MODULE_usb_common
+       select FREETZ_MODULE_dvb_core
+       default n
+       
+config FREETZ_MODULE_dib0070
+       bool "dib0070.ko"
+       default n
+       
+config FREETZ_MODULE_dib8000
+       bool "dib8000.ko"
+       default n
+       
+config FREETZ_MODULE_dib7000p
+       bool "dib7000p.ko"
+       default n
+       
+config FREETZ_MODULE_dib7000m
+       bool "dib7000m.ko"
+       default n
+       
+config FREETZ_MODULE_dib0090
+       bool "dib0090.ko"
+       default n
+       
+config FREETZ_MODULE_dib3000mc
+       bool "dib3000mc.ko"
+       default n
+       
+config FREETZ_MODULE_dibx000_common
+       bool "dibx000_common.ko"
+       default n
+       
+config FREETZ_MODULE_dvb_usb
+       bool "dvb-usb.ko"
+       default n
+       
+config FREETZ_MODULE_rc_core
+       bool "rc-core.ko"
+       default n
+       
+config FREETZ_MODULE_dvb_core
+       bool "dvb-core.ko"
+       default n
+
+
 endmenu
 
 menu "fs"
