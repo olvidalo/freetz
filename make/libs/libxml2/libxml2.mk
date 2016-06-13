@@ -34,7 +34,7 @@ $(PKG)_CONFIGURE_OPTIONS += --with-minimum=yes
 $(PKG)_CONFIGURE_OPTIONS += --with-http=yes
 $(PKG)_CONFIGURE_OPTIONS += --with-ftp=yes
 $(PKG)_CONFIGURE_OPTIONS += --with-c14n=yes
-$(PKG)_CONFIGURE_OPTIONS += --with-catalog=no
+$(PKG)_CONFIGURE_OPTIONS += --with-catalog=yes
 $(PKG)_CONFIGURE_OPTIONS += --with-docbook=no
 $(PKG)_CONFIGURE_OPTIONS += --with-html=$(if $(FREETZ_LIB_libxml2_WITH_HTML),yes,no)
 $(PKG)_CONFIGURE_OPTIONS += --with-legacy=no		#deprecated APIs for compatibility
