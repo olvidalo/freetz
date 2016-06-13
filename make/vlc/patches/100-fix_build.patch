@@ -1,0 +1,40 @@
+--- bin/Makefile.in	2016-04-04 17:45:46.000000000 -0700
++++ bin/Makefile.in	2016-05-25 00:41:45.472241714 -0700
+@@ -1066,7 +1066,7 @@
+ vlc_wrapper_SOURCES = rootwrap.c
+ vlc_wrapper_LDADD = $(SOCKET_LIBS)
+ vlc_LDFLAGS = $(LDFLAGS_vlc)
+-vlc_LDADD = ../lib/libvlc.la $(LIBPTHREAD) $(am__append_4) \
++vlc_LDADD = ../src/libvlccore.la ../lib/libvlc.la $(LIBPTHREAD) $(am__append_4) \
+ 	$(am__append_5)
+ vlc_static_SOURCES = $(vlc_SOURCES)
+ vlc_static_CFLAGS = $(AM_CFLAGS) \
+@@ -1080,7 +1080,7 @@
+ @HAVE_WIN32_TRUE@vlc_DEPENDENCIES = vlc_win32_rc.$(OBJEXT)
+ vlc_cache_gen_SOURCES = cachegen.c
+ vlc_cache_gen_LDADD = $(GNUGETOPT_LIBS) ../compat/libcompat.la \
+-	../lib/libvlc.la $(am__append_7)
++	../src/libvlccore.la ../lib/libvlc.la $(am__append_7)
+ @HAVE_WIN32_TRUE@vlc_cache_gen_DEPENDENCIES = vlc_win32_rc.$(OBJEXT)
+ MOSTLYCLEANFILES = $(noinst_DATA)
+ all: all-am
+
+--- bin/Makefile.am	2016-05-25 03:08:16.147014061 -0700
++++ bin/Makefile.am	2016-05-25 03:15:59.313493385 -0700
+@@ -51,7 +51,7 @@
+ vlc_wrapper_LDADD = $(SOCKET_LIBS)
+ 
+ vlc_LDFLAGS = $(LDFLAGS_vlc)
+-vlc_LDADD = ../lib/libvlc.la $(LIBPTHREAD)
++vlc_LDADD = ../src/libvlccore.la ../lib/libvlc.la $(LIBPTHREAD)
+ 
+ vlc_static_SOURCES = $(vlc_SOURCES)
+ vlc_static_CFLAGS = $(AM_CFLAGS) \
+@@ -81,6 +81,7 @@
+ vlc_cache_gen_LDADD = \
+ 	$(GNUGETOPT_LIBS) \
+ 	../compat/libcompat.la \
++	../src/libvlccore.la \
+ 	../lib/libvlc.la
+ if HAVE_WIN32
+ vlc_cache_gen_LDADD += vlc_win32_rc.$(OBJEXT)
