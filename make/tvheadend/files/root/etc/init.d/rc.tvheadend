@@ -1,0 +1,49 @@
+#!/bin/sh
+
+DAEMON=tvheadend
+DAEMON_LONG_NAME="tvheadend"
+. /etc/init.d/modlibrc
+
+
+
+start() {
+    modlib_startdaemon $DAEMON -c $TVHEADEND_CONFIGDIR --fork
+}
+
+
+case $1 in
+    ""|load)
+        config
+
+        modreg cgi $DAEMON "$DAEMON_LONG_NAME"
+        modreg daemon $DAEMON
+
+        modlib_start $TVHEADEND_ENABLED
+        ;;
+    unload)
+        modunreg daemon $DAEMON
+        modunreg cgi $DAEMON
+
+        modlib_stop
+        ;;
+    start)
+        modlib_start
+        ;;
+    stop)
+        modlib_stop
+        ;;
+    restart)
+        modlib_restart
+        ;;
+    status)
+        modlib_status
+        ;;
+    *)
+        echo "Usage: $0 [load|unload|start|stop|restart|status]" 1>&2
+        exit 1
+        ;;
+esac
+
+exit 0
+
+
