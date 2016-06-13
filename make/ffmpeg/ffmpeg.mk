@@ -1,6 +1,6 @@
-$(call PKG_INIT_BIN, 1.2.12)
+$(call PKG_INIT_BIN, 2.8.6)
 $(PKG)_SOURCE:=$(pkg)-$($(PKG)_VERSION).tar.bz2
-$(PKG)_SOURCE_MD5:=3bc8a4681d720059157b3e0b481c12c7
+$(PKG)_SOURCE_MD5:=2e7b3083b9fdb4d21fc72a42419784a8
 $(PKG)_SITE:=http://www.ffmpeg.org/releases
 
 $(PKG)_DEPENDS_ON += zlib
@@ -13,9 +13,9 @@ $(PKG)_BINARIES            := $(call PKG_SELECTED_SUBOPTIONS,$($(PKG)_BINARIES_A
 $(PKG)_BINARIES_BUILD_DIR  := $($(PKG)_BINARIES:%=$($(PKG)_DIR)/%)
 $(PKG)_BINARIES_TARGET_DIR := $($(PKG)_BINARIES:%=$($(PKG)_DEST_DIR)/usr/bin/%)
 
-$(PKG)_LIBNAMES_SHORT      := avcodec avdevice avfilter avformat avutil postproc swresample swscale
-$(PKG)_LIBVERSIONS_MAJOR   := 54      54       3        54       52     52       0          2
-$(PKG)_LIBVERSIONS_MINOR   := 92.100  3.103    42.103   63.104   18.100 2.100    17.102     2.100
+$(PKG)_LIBNAMES_SHORT      := avcodec avdevice avfilter avformat avutil postproc swresample swscale avresample
+$(PKG)_LIBVERSIONS_MAJOR   := 56      56       5        56       54     53       1          3       2
+$(PKG)_LIBVERSIONS_MINOR   := 60.100  4.100    40.101   40.101   31.100 3.100    2.101      1.101   1.0
 
 $(PKG)_LIBNAMES_LONG_MAJOR := $(join $($(PKG)_LIBNAMES_SHORT:%=lib%.so.),$($(PKG)_LIBVERSIONS_MAJOR))
 $(PKG)_LIBNAMES_LONG       := $(join $($(PKG)_LIBNAMES_LONG_MAJOR:%=%.),$($(PKG)_LIBVERSIONS_MINOR))
@@ -23,10 +23,10 @@ $(PKG)_LIBS_BUILD_DIR      := $(join $($(PKG)_LIBNAMES_SHORT:%=$($(PKG)_DIR)/lib
 $(PKG)_LIBS_STAGING_DIR    := $($(PKG)_LIBNAMES_LONG:%=$(TARGET_TOOLCHAIN_STAGING_DIR)/usr/lib/%)
 $(PKG)_LIBS_TARGET_DIR     := $($(PKG)_LIBNAMES_LONG:%=$($(PKG)_TARGET_LIBDIR)/%)
 
-$(PKG)_ENCODERS  := ac3 jpegls mjpeg mpeg1video mpeg2video mpeg4 pcm_s16be pcm_s16le png vorbis zlib
+$(PKG)_ENCODERS  := mp2 ac3 jpegls mjpeg mpeg1video mpeg2video mpeg4 pcm_s16be pcm_s16le png vorbis zlib
 $(PKG)_DECODERS  := aac ac3 atrac3 gif h264 jpegls libopenjpeg mjpeg mjpegb mp2 mp3 mpeg1video mpeg2video mpeg4 mpegvideo pcm_s16be pcm_s16le png vorbis wmav1 wmav2 zlib
 $(PKG)_MUXERS    := ac3 avi ffm flv h264 matroska mjpeg mov mp3 mp4 mpeg1video mpeg2video mpegts ogg rtp
-$(PKG)_DEMUXERS  := ac3 avi ffm flv h264 image2 matroska mjpeg mov mp3 mpegps mpegts mpegvideo ogg rm rtsp sdp v4l2
+$(PKG)_DEMUXERS  := hls ac3 avi ffm flv h264 image2 matroska mjpeg mov mp3 mpegps mpegts mpegvideo ogg rm rtsp sdp v4l2
 $(PKG)_PARSERS   := aac ac3 h264 mjpeg mpegaudio mpegvideo mpeg4video
 $(PKG)_PROTOCOLS := file http pipe rtp tcp udp
 
@@ -81,10 +81,13 @@ $(PKG)_CONFIGURE_OPTIONS += $($(PKG)_CONFIGURE_DEMUXERS)
 $(PKG)_CONFIGURE_OPTIONS += $($(PKG)_CONFIGURE_PARSERS)
 $(PKG)_CONFIGURE_OPTIONS += $($(PKG)_CONFIGURE_PROTOCOLS)
 
+$(PKG)_CONFIGURE_OPTIONS += --enable-filter=aresample
+
 $(PKG)_CONFIGURE_OPTIONS += $(if $(FREETZ_PACKAGE_FFMPEG_ffmpeg),--enable-ffmpeg,--disable-ffmpeg)
 $(PKG)_CONFIGURE_OPTIONS += $(if $(FREETZ_PACKAGE_FFMPEG_ffserver),--enable-ffserver,--disable-ffserver)
 $(PKG)_CONFIGURE_OPTIONS += --disable-ffplay
 $(PKG)_CONFIGURE_OPTIONS += --disable-ffprobe
+$(PKG)_CONFIGURE_OPTIONS += --enable-avresample
 
 
 $(PKG_SOURCE_DOWNLOAD)

@@ -18,6 +18,7 @@ config FREETZ_PACKAGE_FFMPEG_ffmpeg
 	select FREETZ_LIB_libavfilter
 	select FREETZ_LIB_libavformat
 	select FREETZ_LIB_libavutil
+	select FREETZ_LIB_libavresample
 	select FREETZ_LIB_libpostproc
 	select FREETZ_LIB_libswresample
 	select FREETZ_LIB_libswscale

@@ -48,6 +48,12 @@ config FREETZ_LIB_libswresample
 	select FREETZ_LIB_libavutil
 	default n
 
+
+config FREETZ_LIB_libavresample
+	bool "libavresample.so"
+	default n
+
+
 config FREETZ_LIB_libswscale
 	bool "libswscale.so"
 	select FREETZ_LIB_libm
